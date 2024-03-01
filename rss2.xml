@@ -9,7 +9,7 @@
     <atom:link href="http://hangker.top/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>选择比努力重要</description>
-    <pubDate>Fri, 01 Mar 2024 02:51:03 GMT</pubDate>
+    <pubDate>Fri, 01 Mar 2024 03:17:43 GMT</pubDate>
     <generator>http://hexo.io/</generator>
     
     <item>
@@ -21,6 +21,8 @@
       <description>八股，干就完了</description>
       
       
+      
+      <content:encoded><![CDATA[<h1 id="Redis详解"><a href="#Redis详解" class="headerlink" title="Redis详解"></a>Redis详解</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>要学习redis当然要先安装了，在linux系统中</p><ul><li><a href="https://github.com/redis/redis-hashes/?tab=readme-ov-file">https://github.com/redis/redis-hashes/?tab=readme-ov-file</a> ,这里是Redis各个版本的下载地址，我下的是5.0.3的版本</li><li>把下载好的安装包放在 &#x2F;usr&#x2F;local文件夹下</li><li>tar -zxvf redis-5.0.3.tar.gz</li><li>cd redis-5.0.3</li><li>make (进入到解压好的redis-5.0.0目录下，进行编译与安装)</li><li>启动并指定配置文件： src&#x2F;redis-server redis.conf  (使用后台启动，把redis.conf里的daemonize改为yes)</li><li>验证：ps -ef | grep redis</li><li>进入客户端：src&#x2F;redis-cli </li><li>退出客户端：exit</li></ul>]]></content:encoded>
       
       
       <category domain="http://hangker.top/categories/%E7%BC%93%E5%AD%98%E4%B8%AD%E9%97%B4%E4%BB%B6/">缓存中间件</category>
