@@ -9,8 +9,35 @@
     <atom:link href="http://hangker.top/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>选择比努力重要</description>
-    <pubDate>Fri, 01 Mar 2024 02:42:09 GMT</pubDate>
+    <pubDate>Fri, 01 Mar 2024 02:48:46 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Redis详解</title>
+      <link>http://hangker.top/2024/03/01/Redis%E8%AF%A6%E8%A7%A3/</link>
+      <guid>http://hangker.top/2024/03/01/Redis%E8%AF%A6%E8%A7%A3/</guid>
+      <pubDate>Fri, 01 Mar 2024 02:00:00 GMT</pubDate>
+      
+      <description>八股，干就完乐</description>
+      
+      
+      
+      
+      <category domain="http://hangker.top/categories/%E5%B9%B6%E5%8F%91/">并发</category>
+      
+      
+      <category domain="http://hangker.top/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</category>
+      
+      <category domain="http://hangker.top/tags/Redis/">Redis</category>
+      
+      <category domain="http://hangker.top/tags/%E5%85%AB%E8%82%A1/">八股</category>
+      
+      <category domain="http://hangker.top/tags/%E5%86%85%E5%AD%98/">内存</category>
+      
+      
+      <comments>http://hangker.top/2024/03/01/Redis%E8%AF%A6%E8%A7%A3/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>Nginx详解</title>
