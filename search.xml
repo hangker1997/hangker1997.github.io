@@ -62,7 +62,7 @@
       <link href="/2024/03/01/Redis%E8%AF%A6%E8%A7%A3/"/>
       <url>/2024/03/01/Redis%E8%AF%A6%E8%A7%A3/</url>
       
-        <content type="html"><![CDATA[<h1 id="Redis详解"><a href="#Redis详解" class="headerlink" title="Redis详解"></a>Redis详解</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>要学习redis当然要先安装了，在linux系统中</p><ul><li><a href="https://github.com/redis/redis-hashes/?tab=readme-ov-file">https://github.com/redis/redis-hashes/?tab=readme-ov-file</a> ,这里是Redis各个版本的下载地址，我下的是5.0.3的版本</li><li>把下载好的安装包放在 &#x2F;usr&#x2F;local文件夹下</li><li>tar -zxvf redis-5.0.3.tar.gz</li><li>cd redis-5.0.3</li><li>make (进入到解压好的redis-5.0.0目录下，进行编译与安装)</li><li>启动并指定配置文件： src&#x2F;redis-server redis.conf  (使用后台启动，把redis.conf里的daemonize改为yes)</li><li>验证：ps -ef | grep redis</li><li>进入客户端：src&#x2F;redis-cli </li><li>退出客户端：exit</li></ul>]]></content>
+        <content type="html"><![CDATA[<h1 id="Redis详解"><a href="#Redis详解" class="headerlink" title="Redis详解"></a>Redis详解</h1><h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>要学习redis当然要先安装了，在linux系统中</p><ul><li><a href="https://github.com/redis/redis-hashes/?tab=readme-ov-file">https://github.com/redis/redis-hashes/?tab=readme-ov-file</a> ,这里是Redis各个版本的下载地址，我下的是5.0.3的版本</li><li>把下载好的安装包放在 &#x2F;usr&#x2F;local文件夹下</li><li>tar -zxvf redis-5.0.3.tar.gz</li><li>cd redis-5.0.3</li><li>make (进入到解压好的redis-5.0.0目录下，进行编译与安装)</li><li>启动并指定配置文件： src&#x2F;redis-server redis.conf  (使用后台启动，把redis.conf里的daemonize改为yes)</li><li>验证：ps -ef | grep redis</li><li>进入客户端：src&#x2F;redis-cli </li><li>退出客户端：exit</li></ul><h2 id="常用数据结构"><a href="#常用数据结构" class="headerlink" title="常用数据结构"></a>常用数据结构</h2><p>建议去看官方文档</p><h3 id="String应用场景"><a href="#String应用场景" class="headerlink" title="String应用场景"></a>String应用场景</h3><h4 id="单值缓存"><a href="#单值缓存" class="headerlink" title="单值缓存"></a>单值缓存</h4><p>set key value </p><p>get key </p><h4 id="对象缓存"><a href="#对象缓存" class="headerlink" title="对象缓存"></a>对象缓存</h4><p>set user:1 value(json格式数据)</p><p>mset user:1 name hangker user:1:balance 1888</p><p>mget user1:name user:1:balance</p><h4 id="分布式锁"><a href="#分布式锁" class="headerlink" title="分布式锁"></a>分布式锁</h4><p>setnx product:10001 true &#x2F;&#x2F;返回1代表获取锁成功0代表失败</p><p>del product:10001    &#x2F;&#x2F;执行完业务释放锁</p><p>set product:10001 true ex 10 nx &#x2F;&#x2F;防止程序意外终止导致死锁</p><h4 id="计数器"><a href="#计数器" class="headerlink" title="计数器"></a>计数器</h4><p>incr article:readcount:{文章id} </p><p>get article:readcount:{文章id} </p><h4 id="Web集群session共享"><a href="#Web集群session共享" class="headerlink" title="Web集群session共享"></a>Web集群session共享</h4><p>spring session+ redis实现session共享</p><h4 id="分布式系统全局序列号"><a href="#分布式系统全局序列号" class="headerlink" title="分布式系统全局序列号"></a>分布式系统全局序列号</h4><p>incrby orderid 1000 &#x2F;&#x2F;redis批量生成序列号提升性能</p><h3 id="HASH应用场景"><a href="#HASH应用场景" class="headerlink" title="HASH应用场景"></a>HASH应用场景</h3><h4 id="对象缓存-1"><a href="#对象缓存-1" class="headerlink" title="对象缓存"></a>对象缓存</h4><p>hmset user {userID}:name hangker {userID}:balance 1888 </p><p>hmset user 1:name hangker 1:balance 1888</p><p>hmget user 1:name 1:balance </p><h4 id="电商购物车"><a href="#电商购物车" class="headerlink" title="电商购物车"></a>电商购物车</h4><p>以用户id为key，商品id为field，商品数量为value</p><p>购物车操作</p><ol><li>添加商品-&gt;hset cart：101 10088 1</li><li>增加数量-&gt;hincrby cart:101 10088 1</li><li>商品总数-&gt;hlen cart:101</li><li>删除商品-&gt;hdel crt:101 10088</li><li>获取购物车所有商品-&gt;hgetall cart:101</li></ol><h3 id=""><a href="#" class="headerlink" title=""></a></h3><h3 id="-1"><a href="#-1" class="headerlink" title=""></a></h3><h3 id="-2"><a href="#-2" class="headerlink" title=""></a></h3>]]></content>
       
       
       <categories>
@@ -74,13 +74,13 @@
       
         <tags>
             
-            <tag> 高可用 </tag>
-            
             <tag> Redis </tag>
             
             <tag> 八股 </tag>
             
             <tag> 内存 </tag>
+            
+            <tag> 高可用 </tag>
             
         </tags>
       
@@ -105,6 +105,8 @@
       
         <tags>
             
+            <tag> 高可用 </tag>
+            
             <tag> Nginx </tag>
             
             <tag> 负载均衡 </tag>
@@ -112,8 +114,6 @@
             <tag> 反向代理 </tag>
             
             <tag> 动静分离 </tag>
-            
-            <tag> 高可用 </tag>
             
         </tags>
       
