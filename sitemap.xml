@@ -184,6 +184,20 @@
   </url>
   
   <url>
+    <loc>http://hangker.top/tags/Hexo/</loc>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://hangker.top/tags/%E5%8D%9A%E5%AE%A2/</loc>
+    <lastmod>2024-03-21</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
     <loc>http://hangker.top/tags/ClickHouse/</loc>
     <lastmod>2024-03-21</lastmod>
     <changefreq>weekly</changefreq>
@@ -199,20 +213,6 @@
   
   <url>
     <loc>http://hangker.top/tags/Flume/</loc>
-    <lastmod>2024-03-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://hangker.top/tags/Hexo/</loc>
-    <lastmod>2024-03-21</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
-    <loc>http://hangker.top/tags/%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2024-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -256,14 +256,14 @@
   </url>
   
   <url>
-    <loc>http://hangker.top/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/</loc>
+    <loc>http://hangker.top/categories/%E5%8D%9A%E5%AE%A2/</loc>
     <lastmod>2024-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://hangker.top/categories/%E5%8D%9A%E5%AE%A2/</loc>
+    <loc>http://hangker.top/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2024-03-21</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
