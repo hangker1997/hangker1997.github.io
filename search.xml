@@ -99,13 +99,13 @@
       
         <tags>
             
-            <tag> 高可用 </tag>
-            
             <tag> Redis </tag>
             
             <tag> 八股 </tag>
             
             <tag> 内存 </tag>
+            
+            <tag> 高可用 </tag>
             
         </tags>
       
@@ -130,6 +130,8 @@
       
         <tags>
             
+            <tag> 高可用 </tag>
+            
             <tag> Nginx </tag>
             
             <tag> 负载均衡 </tag>
@@ -137,8 +139,6 @@
             <tag> 反向代理 </tag>
             
             <tag> 动静分离 </tag>
-            
-            <tag> 高可用 </tag>
             
         </tags>
       
