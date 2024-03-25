@@ -29,31 +29,6 @@
     
     
     <entry>
-      <title>Linux常用命令</title>
-      <link href="/2024/03/04/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-      <url>/2024/03/04/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><h3 id="防火墙相关（centos7）"><a href="#防火墙相关（centos7）" class="headerlink" title="防火墙相关（centos7）"></a>防火墙相关（centos7）</h3><ol><li>查看firewalld服务状态：<code>systemctl status firewalld</code></li><li>开启firewalld：<code>systemctl start firewalld</code></li><li>关闭firewalld：<code>systemctl stop firewalld</code></li><li>配置firewalld的规则：<code>firewall-cmd</code></li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> Linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Linux </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
       <title>异常记录篇【持续更新】</title>
       <link href="/2024/03/04/%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E7%AF%87%E3%80%91/"/>
       <url>/2024/03/04/%E5%BC%82%E5%B8%B8%E8%A7%A3%E5%86%B3%E3%80%90%E6%8C%81%E7%BB%AD%E6%9B%B4%E6%96%B0%E7%AF%87%E3%80%91/</url>
@@ -73,6 +48,31 @@
             <tag> 日志排查 </tag>
             
             <tag> 异常 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Linux常用命令</title>
+      <link href="/2024/03/04/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+      <url>/2024/03/04/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><h3 id="防火墙相关（centos7）"><a href="#防火墙相关（centos7）" class="headerlink" title="防火墙相关（centos7）"></a>防火墙相关（centos7）</h3><ol><li>查看firewalld服务状态：<code>systemctl status firewalld</code></li><li>开启firewalld：<code>systemctl start firewalld</code></li><li>关闭firewalld：<code>systemctl stop firewalld</code></li><li>配置firewalld的规则：<code>firewall-cmd</code></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
             
         </tags>
       
