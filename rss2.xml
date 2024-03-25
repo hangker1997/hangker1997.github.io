@@ -9,8 +9,31 @@
     <atom:link href="http://hangker.top/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>选择比努力重要</description>
-    <pubDate>Thu, 21 Mar 2024 07:02:13 GMT</pubDate>
+    <pubDate>Mon, 25 Mar 2024 07:15:31 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>Linux常用命令</title>
+      <link>http://hangker.top/2024/03/25/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <guid>http://hangker.top/2024/03/25/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <pubDate>Mon, 25 Mar 2024 07:15:00 GMT</pubDate>
+      
+      <description>Linux</description>
+      
+      
+      
+      <content:encoded><![CDATA[<h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><h3 id="防火墙相关（centos7）"><a href="#防火墙相关（centos7）" class="headerlink" title="防火墙相关（centos7）"></a>防火墙相关（centos7）</h3><ol><li>查看firewalld服务状态：<code>systemctl status firewalld</code></li><li>开启firewalld：<code>systemctl start firewalld</code></li><li>关闭firewalld：<code>systemctl stop firewalld</code></li><li>配置firewalld的规则：<code>firewall-cmd</code></li></ol>]]></content:encoded>
+      
+      
+      <category domain="http://hangker.top/categories/Linux/">Linux</category>
+      
+      
+      <category domain="http://hangker.top/tags/Linux/">Linux</category>
+      
+      
+      <comments>http://hangker.top/2024/03/25/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>简历注意事项</title>
@@ -35,29 +58,6 @@
       
       
       <comments>http://hangker.top/2024/03/12/%E7%AE%80%E5%8E%86%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>Linux常用命令</title>
-      <link>http://hangker.top/2024/03/04/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
-      <guid>http://hangker.top/2024/03/04/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
-      <pubDate>Mon, 04 Mar 2024 01:00:00 GMT</pubDate>
-      
-      <description>Linux</description>
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><h3 id="防火墙相关（centos7）"><a href="#防火墙相关（centos7）" class="headerlink" title="防火墙相关（centos7）"></a>防火墙相关（centos7）</h3><ol><li>查看firewalld服务状态：<code>systemctl status firewalld</code></li><li>开启firewalld：<code>systemctl start firewalld</code></li><li>关闭firewalld：<code>systemctl stop firewalld</code></li><li>配置firewalld的规则：<code>firewall-cmd</code></li></ol>]]></content:encoded>
-      
-      
-      <category domain="http://hangker.top/categories/Linux/">Linux</category>
-      
-      
-      <category domain="http://hangker.top/tags/Linux/">Linux</category>
-      
-      
-      <comments>http://hangker.top/2024/03/04/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/#disqus_thread</comments>
       
     </item>
     

@@ -4,6 +4,31 @@
   
     
     <entry>
+      <title>Linux常用命令</title>
+      <link href="/2024/03/25/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
+      <url>/2024/03/25/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><h3 id="防火墙相关（centos7）"><a href="#防火墙相关（centos7）" class="headerlink" title="防火墙相关（centos7）"></a>防火墙相关（centos7）</h3><ol><li>查看firewalld服务状态：<code>systemctl status firewalld</code></li><li>开启firewalld：<code>systemctl start firewalld</code></li><li>关闭firewalld：<code>systemctl stop firewalld</code></li><li>配置firewalld的规则：<code>firewall-cmd</code></li></ol>]]></content>
+      
+      
+      <categories>
+          
+          <category> Linux </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Linux </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>简历注意事项</title>
       <link href="/2024/03/12/%E7%AE%80%E5%8E%86%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/"/>
       <url>/2024/03/12/%E7%AE%80%E5%8E%86%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/</url>
@@ -48,31 +73,6 @@
             <tag> 日志排查 </tag>
             
             <tag> 异常 </tag>
-            
-        </tags>
-      
-    </entry>
-    
-    
-    
-    <entry>
-      <title>Linux常用命令</title>
-      <link href="/2024/03/04/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/"/>
-      <url>/2024/03/04/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</url>
-      
-        <content type="html"><![CDATA[<h2 id="Linux常用命令"><a href="#Linux常用命令" class="headerlink" title="Linux常用命令"></a>Linux常用命令</h2><h3 id="防火墙相关（centos7）"><a href="#防火墙相关（centos7）" class="headerlink" title="防火墙相关（centos7）"></a>防火墙相关（centos7）</h3><ol><li>查看firewalld服务状态：<code>systemctl status firewalld</code></li><li>开启firewalld：<code>systemctl start firewalld</code></li><li>关闭firewalld：<code>systemctl stop firewalld</code></li><li>配置firewalld的规则：<code>firewall-cmd</code></li></ol>]]></content>
-      
-      
-      <categories>
-          
-          <category> Linux </category>
-          
-      </categories>
-      
-      
-        <tags>
-            
-            <tag> Linux </tag>
             
         </tags>
       
