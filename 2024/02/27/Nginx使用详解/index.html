@@ -1,0 +1,355 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0,viewport-fit=cover"><title>Nginx详解 | 启航苑&amp;博客</title><meta name="author" content="启航君"><meta name="copyright" content="启航君"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#ffffff"><meta name="description" content="学习心得">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Nginx详解">
+<meta property="og:url" content="http://hangker.top/2024/02/27/Nginx%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/index.html">
+<meta property="og:site_name" content="启航苑&amp;博客">
+<meta property="og:description" content="学习心得">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://hangker.top/img/headImage.png">
+<meta property="article:published_time" content="2024-02-27T02:00:00.000Z">
+<meta property="article:modified_time" content="2024-06-18T13:27:24.417Z">
+<meta property="article:author" content="启航君">
+<meta property="article:tag" content="高可用">
+<meta property="article:tag" content="Nginx">
+<meta property="article:tag" content="负载均衡">
+<meta property="article:tag" content="反向代理">
+<meta property="article:tag" content="动静分离">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://hangker.top/img/headImage.png"><link rel="shortcut icon" href="/img/favicon.png"><link rel="canonical" href="http://hangker.top/2024/02/27/Nginx%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/index.html"><link rel="preconnect" href="//cdn.jsdelivr.net"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><link rel="stylesheet" href="/css/index.css?v=4.13.0"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.5.1/css/all.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.min.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"/search.xml","preload":false,"top_n_per_article":1,"unescape":false,"languages":{"hits_empty":"找不到您查询的内容：${query}","hits_stats":"共找到 ${hits} 篇文章"}},
+  translate: undefined,
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":false,"highlightHeightLimit":false},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    post: false
+  },
+  runtime: '天',
+  dateSuffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: undefined,
+  lightbox: 'fancybox',
+  Snackbar: undefined,
+  infinitegrid: {
+    js: 'https://cdn.jsdelivr.net/npm/@egjs/infinitegrid@4.11.1/dist/infinitegrid.min.js',
+    buttonText: '加载更多'
+  },
+  isPhotoFigcaption: false,
+  islazyload: false,
+  isAnchor: false,
+  percent: {
+    toc: true,
+    rightside: false,
+  },
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  title: 'Nginx详解',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2024-06-18 21:27:24'
+}</script><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#0d0d0d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#ffffff')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><link rel="stylesheet" href="/css/background.css"><meta name="generator" content="Hexo 7.1.1"><link rel="alternate" href="/rss2.xml" title="启航苑&博客" type="application/rss+xml">
+</head><body><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="avatar-img is-center"><img src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="/img/headImage.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"/></div><div class="sidebar-site-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><hr class="custom-hr"/><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div></div></div><div class="post" id="body-wrap"><header class="post-bg" id="page-header" style="background-image: url('/img/background.png')"><nav id="nav"><span id="blog-info"><a href="/" title="启航苑&amp;博客"><span class="site-name">启航苑&amp;博客</span></a></span><div id="menus"><div id="search-button"><a class="site-page social-icon search" href="javascript:void(0);"><i class="fas fa-search fa-fw"></i><span> 搜索</span></a></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fas fa-home"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page group" href="javascript:void(0);"><i class="fa-fw fa fa-graduation-cap"></i><span> 博文</span><i class="fas fa-chevron-down"></i></a><ul class="menus_item_child"><li><a class="site-page child" href="/categories/"><i class="fa-fw fa fa-archive"></i><span> 分类</span></a></li><li><a class="site-page child" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></li><li><a class="site-page child" href="/archives/"><i class="fa-fw fa fa-folder-open"></i><span> 归档</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/links/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/messageboard/"><i class="fa-fw fa fa-paper-plane"></i><span> 留言板</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fas fa-heart"></i><span> 关于笔者</span></a></div></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);"><i class="fas fa-bars fa-fw"></i></a></div></div></nav><div id="post-info"><h1 class="post-title">Nginx详解</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="far fa-calendar-alt fa-fw post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" datetime="2024-02-27T02:00:00.000Z" title="发表于 2024-02-27 10:00:00">2024-02-27</time><span class="post-meta-separator">|</span><i class="fas fa-history fa-fw post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" datetime="2024-06-18T13:27:24.417Z" title="更新于 2024-06-18 21:27:24">2024-06-18</time></span><span class="post-meta-categories"><span class="post-meta-separator">|</span><i class="fas fa-inbox fa-fw post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%B9%B6%E5%8F%91/">并发</a></span></div><div class="meta-secondline"><span class="post-meta-separator">|</span><span class="post-meta-wordcount"><i class="far fa-file-word fa-fw post-meta-icon"></i><span class="post-meta-label">字数总计:</span><span class="word-count">2.6k</span><span class="post-meta-separator">|</span><i class="far fa-clock fa-fw post-meta-icon"></i><span class="post-meta-label">阅读时长:</span><span>9分钟</span></span><span class="post-meta-separator">|</span><span class="post-meta-pv-cv" id="" data-flag-title="Nginx详解"><i class="far fa-eye fa-fw post-meta-icon"></i><span class="post-meta-label">阅读量:</span><span id="busuanzi_value_page_pv"><i class="fa-solid fa-spinner fa-spin"></i></span></span></div></div></div></header><main class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container"><h1 id="Nginx详解"><a href="#Nginx详解" class="headerlink" title="Nginx详解"></a>Nginx详解</h1><h2 id="作用"><a href="#作用" class="headerlink" title="作用"></a>作用</h2><h3 id="反向代理"><a href="#反向代理" class="headerlink" title="反向代理"></a>反向代理</h3><p>我们将请求发送到反向代理服务器，由反向代理服务器选择目标服务器获取数据后，再返回给客户端，此时反向代理服务器和目标服务器对外就是一个服务器，暴露的是代理服务器地址，隐藏了真实服务器IP地址</p>
+<p>那么何为正向代理呢？</p>
+<p>在客户端(浏览器)配置代理服务器，通过代理服务器进行互联网访问，就像我们翻墙访问谷歌一样….</p>
+<h3 id="负载均衡"><a href="#负载均衡" class="headerlink" title="负载均衡"></a>负载均衡</h3><p>单个服务器解决不了，我们增加服务器的数量，然后将请求分发到各个服务器上，将原先请求集中到单个服务器上的情况改为将请求分发到多个服务器上，将负载分发到不同的服务器</p>
+<h3 id="动静分离"><a href="#动静分离" class="headerlink" title="动静分离"></a>动静分离</h3><p>为了加快网站的解析速度，可以把动态页面（Jsp、Servlet）与静态页面（Html、Css、Js）由不同的服务器来解析，加快解析速度。降低原来单个服务器的压力</p>
+<h2 id="安装"><a href="#安装" class="headerlink" title="安装"></a>安装</h2><p>推荐docker安装，简单快速好用</p>
+<h3 id="docker-pull-nginx"><a href="#docker-pull-nginx" class="headerlink" title="docker pull nginx"></a>docker pull nginx</h3><h3 id="创建Nginx配置文件"><a href="#创建Nginx配置文件" class="headerlink" title="创建Nginx配置文件"></a>创建Nginx配置文件</h3><p>创建挂载目录</p>
+<p>mkdir -p &#x2F;home&#x2F;nginx&#x2F;conf</p>
+<p>mkdir -p &#x2F;home&#x2F;nginx&#x2F;log</p>
+<p>mkdir -p &#x2F;home&#x2F;nginx&#x2F;html</p>
+<p>生成容器</p>
+<p>docker run –name nginx -p 9001:80 -d nginx</p>
+<p>将容器nginx.conf文件复制到宿主机</p>
+<p>docker cp nginx:&#x2F;etc&#x2F;nginx&#x2F;nginx.conf &#x2F;home&#x2F;nginx&#x2F;conf&#x2F;nginx.conf</p>
+<p>将容器conf.d文件夹下内容复制到宿主机</p>
+<p>docker cp nginx:&#x2F;etc&#x2F;nginx&#x2F;conf.d &#x2F;home&#x2F;nginx&#x2F;conf&#x2F;conf.d</p>
+<p>将容器中的html文件夹复制到宿主机</p>
+<p>docker cp nginx:&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html &#x2F;home&#x2F;nginx&#x2F;</p>
+<h3 id="创建Nginx容器并运行"><a href="#创建Nginx容器并运行" class="headerlink" title="创建Nginx容器并运行"></a>创建Nginx容器并运行</h3><p>docker ps -a</p>
+<p>docker stop nginx</p>
+<p>docker rm nginx</p>
+<p>docker rm -f nginx</p>
+<p>docker run -p 9002:80 –name nginx -v &#x2F;home&#x2F;nginx&#x2F;conf&#x2F;nginx.conf:&#x2F;etc&#x2F;nginx&#x2F;nginx.conf -v &#x2F;home&#x2F;nginx&#x2F;conf&#x2F;conf.d:&#x2F;etc&#x2F;nginx&#x2F;conf.d -v &#x2F;home&#x2F;nginx&#x2F;log:&#x2F;var&#x2F;log&#x2F;nginx -v &#x2F;home&#x2F;nginx&#x2F;html:&#x2F;usr&#x2F;share&#x2F;nginx&#x2F;html -d nginx:latest</p>
+<hr>
+<p>如果正常压缩包安装 进入到 usr&#x2F;local&#x2F;nginx&#x2F;sbin</p>
+<p>启动： .&#x2F;nginx</p>
+<p>查看版本号： .&#x2F;nginx -v</p>
+<p>关闭：.&#x2F;nginx -s stop </p>
+<p>重新加载:.&#x2F;nginx -s reload </p>
+<h3 id="结果查看"><a href="#结果查看" class="headerlink" title="结果查看"></a>结果查看</h3><p>curl 127.0.0.1:9002 </p>
+<h3 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h3><ul>
+<li><p>去挂载目录下&#x2F;home&#x2F;nginx&#x2F;html&#x2F;index.html 做个修改</p>
+</li>
+<li><p>重启容器 docker restart nginx 验证是否正确</p>
+</li>
+<li><p>防火墙 问题 记得开放端口</p>
+</li>
+<li><p>查看开放的端口号：firewall-cmd –list-all</p>
+</li>
+<li><p>设置开放的端口号：firewall-cmd –add-service&#x3D;http -permanent</p>
+</li>
+</ul>
+<p> sudo firewall-cmd –add-port&#x3D;80&#x2F;tcp –permanent</p>
+<ul>
+<li>重启防火墙：firewall-cmd –reload</li>
+</ul>
+<h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><p>走的docker的话:docker exec -it nginx &#x2F;bin&#x2F;bash</p>
+<ul>
+<li>查看版本号：nginx -version</li>
+<li>停止：docker stop nginx </li>
+<li>启动：docker start nginx</li>
+<li>重启：docker restart nginx</li>
+</ul>
+<h2 id="配置文件"><a href="#配置文件" class="headerlink" title="配置文件"></a>配置文件</h2><p>因为是挂载: vi &#x2F;home&#x2F;nginx&#x2F;conf&#x2F;nginx.conf </p>
+<p>配置文件由三部分组成</p>
+<h3 id="全局块"><a href="#全局块" class="headerlink" title="全局块"></a>全局块</h3><p>从配置文件开始到events块之间的内容，主要会设置一些影响nginx服务器整体运行的配置指令</p>
+<p>比如：worker_processes  auto，值越大可以支持的并发处理量越大</p>
+<h3 id="events块"><a href="#events块" class="headerlink" title="events块"></a>events块</h3><p>涉及的指令主要影响Nginx服务器与用户的网络连接</p>
+<p>比如：worker_connections  1024;支持的最大连接数</p>
+<h3 id="http块-重要"><a href="#http块-重要" class="headerlink" title="http块[重要]"></a><strong>http块[重要]</strong></h3><p>这是Nginx服务器配置中最频繁的部分，代理、缓存和日志定义等绝大多数功能和第三方模块的配置都在这里。</p>
+<p>需要注意的是：http块可以包括http全局块、server块</p>
+<h4 id="http全局块"><a href="#http全局块" class="headerlink" title="http全局块"></a>http全局块</h4><p>http全局块配置的指令包括文件引入、MIME-TYPE定义、日志自定义、连接超时时间、单链接请求数上线等</p>
+<h4 id="server块"><a href="#server块" class="headerlink" title="server块"></a>server块</h4><p>这块和虚拟主机有密切关系，虚拟主机从用户角度看，和一台独立的硬件主机是完全一样的，该技术的产生是为了节省互联网服务器硬件成本。 </p>
+<h2 id="Nginx配置实例-反向代理"><a href="#Nginx配置实例-反向代理" class="headerlink" title="Nginx配置实例-反向代理"></a>Nginx配置实例-反向代理</h2><h3 id="实现效果"><a href="#实现效果" class="headerlink" title="实现效果"></a>实现效果</h3><p>打开浏览器，在浏览器地址输入<a target="_blank" rel="noopener" href="http://www.123.com,跳转到linux系统tomcat主页/">www.123.com,跳转到linux系统tomcat主页</a></p>
+<p><img src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E8%BF%87%E7%A8%8B.jpg" alt="反向代理过程"></p>
+<h3 id="准备工作"><a href="#准备工作" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>在linux系统安装tomcat，使用默认端口8080</li>
+<li>安装tomcat（docker安装）</li>
+</ol>
+<ul>
+<li>docker search tomcat</li>
+<li>docker pull tomcat</li>
+<li>docker run -d -p 8080:8080 tomcat</li>
+<li>这时候在浏览器访问发现访问不了，因为新版tomcat把静态资源放到webapps.dist目录下了，webapps无内容</li>
+<li>进入tomcat容器：docker exec -it 容器id &#x2F;bin&#x2F;bash</li>
+<li>ls webapps</li>
+<li>ls webapps.dist&#x2F;</li>
+<li>rm -r webapps</li>
+<li>mv webapps.dist webapps</li>
+<li>去浏览器访问，成功啦！</li>
+</ul>
+<h3 id="具体配置"><a href="#具体配置" class="headerlink" title="具体配置"></a>具体配置</h3><ol>
+<li>在windows系统的host文件进行域名和ip对应关系的配置</li>
+</ol>
+<ul>
+<li>C:\Windows\System32\drivers\etc</li>
+<li>找到HOSTS文件添加内容： ip地址   <a target="_blank" rel="noopener" href="http://www.123.com/">www.123.com</a></li>
+</ul>
+<ol start="2">
+<li>在nginx进行请求转发的配置（反向代理）</li>
+</ol>
+<p><img src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/nginx%E9%85%8D%E7%BD%AE.png" alt="反向代理1"></p>
+<h2 id="Nginx配置实例-反向代理实例2"><a href="#Nginx配置实例-反向代理实例2" class="headerlink" title="Nginx配置实例-反向代理实例2"></a>Nginx配置实例-反向代理实例2</h2><h3 id="实现效果-1"><a href="#实现效果-1" class="headerlink" title="实现效果"></a>实现效果</h3><p>使用nginx反向代理，根据访问的路径跳转到不同端口的服务中，nginx监听端口为9001</p>
+<p>访问<a target="_blank" rel="noopener" href="http://127.0.0.1:9001/edu/">http://127.0.0.1:9001/edu/</a> 直接跳转到 127.0.0.1:8080</p>
+<p>访问<a target="_blank" rel="noopener" href="http://127.0.0.1:9001/vod/">http://127.0.0.1:9001/vod/</a> 直接跳转到 127.0.0.1:8081</p>
+<h3 id="准备工作-1"><a href="#准备工作-1" class="headerlink" title="准备工作"></a>准备工作</h3><p>准备两个tomcat服务器 一个8080端口 一个8081端口</p>
+<p>创建文件夹和测试页面</p>
+<h3 id="具体配置-1"><a href="#具体配置-1" class="headerlink" title="具体配置"></a>具体配置</h3><ol>
+<li>找到nginx配置文件</li>
+</ol>
+<p><img src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/nginx%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%AE%9E%E4%BE%8B2.png" alt="反向代理2"></p>
+<p>重启ng </p>
+<ol start="2">
+<li>开放9001端口 往上参考</li>
+</ol>
+<h2 id="Nginx配置实例-负载均衡"><a href="#Nginx配置实例-负载均衡" class="headerlink" title="Nginx配置实例-负载均衡"></a>Nginx配置实例-负载均衡</h2><h3 id="实现效果-2"><a href="#实现效果-2" class="headerlink" title="实现效果"></a>实现效果</h3><p>浏览器地址输入地址 <a target="_blank" rel="noopener" href="http://192.168.19.80/edu/aaa.html,%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E6%95%88%E6%9E%9C%EF%BC%8C%E5%B9%B3%E5%9D%878080%E5%92%8C8081%E7%AB%AF%E5%8F%A3%E4%B8%AD">http://192.168.19.80/edu/aaa.html,负载均衡效果，平均8080和8081端口中</a></p>
+<h3 id="准备工作-2"><a href="#准备工作-2" class="headerlink" title="准备工作"></a>准备工作</h3><ol>
+<li>准备两台tomcat，一台8080，一台8081</li>
+<li>在两台tomcat里面webapps目录，创建名称是edu文件夹，在edu文件夹里面创建页面aaa.html</li>
+<li>在nginx的配置文件中进行负载均衡的配置</li>
+</ol>
+<p><img src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/nginx%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1.jpg" alt="负载均衡配置"></p>
+<ol start="4">
+<li>重新加载 .&#x2F;nginx -s reload</li>
+</ol>
+<h3 id="负载均衡策略"><a href="#负载均衡策略" class="headerlink" title="负载均衡策略"></a>负载均衡策略</h3><h4 id="轮询（默认）"><a href="#轮询（默认）" class="headerlink" title="轮询（默认）"></a>轮询（默认）</h4><p>每个请求按时间顺序逐一分配到不同的后端服务器，如果后端服务器down掉，能自动剔除</p>
+<h4 id="weight（权重）"><a href="#weight（权重）" class="headerlink" title="weight（权重）"></a>weight（权重）</h4><p>weight代表权重，默认为1，权重越高被分配的客户端越多</p>
+<p><img src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E4%B9%8B%E6%9D%83%E9%87%8D.jpg" alt="负载均衡之权重"></p>
+<h4 id="ip-hash"><a href="#ip-hash" class="headerlink" title="ip_hash"></a>ip_hash</h4><p>每个请求按照访问ip的hash结果分配，这样每个访客固定访问一个后端服务器，可以解决session的问题</p>
+<p><img src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E4%B9%8Bip_hash.jpg" alt="ip_hash"></p>
+<h4 id="fair"><a href="#fair" class="headerlink" title="fair"></a>fair</h4><p>按后端服务器的响应时间来分配请求，响应时间短的优先分配</p>
+<p><img src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E4%B9%8Bfair.jpg" alt="fair"></p>
+<h2 id="Nginx配置实例-动静分离"><a href="#Nginx配置实例-动静分离" class="headerlink" title="Nginx配置实例-动静分离"></a>Nginx配置实例-动静分离</h2><p>实现角度来看大致分为两种：</p>
+<ul>
+<li>纯粹把静态文件独立成单独的域名，放在独立的服务器上（主流）</li>
+<li>动态跟静态文件混合在一起发布，通过nginx分开</li>
+</ul>
+<p><img src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB.jpg" alt="动静分离第一种实现"></p>
+<p>通过location制定不同的后缀名实现不同的请求转发。通过expires参数设置，可以使浏览器缓存过期时间，减少与服务器之前的请求和流量。 具体Expires定义：是给一个资源设定一个过期时间，也就是说无需去服务端验证，直接通过浏览器自身确认是否过期即可，所以不会产生额外的流量。此方法非常适合不经常变动的资源（若经常更新的文件，不建议使用Expires来缓存）,比如我设置3d，表示在这3天之内访问这个URL，发送一个请求，比对服务器该文件最后更新时间没有发生变化，则不会从服务器抓取，返回状态码304，如果有修改，则直接从服务器直接下载，返回200</p>
+<h3 id="准备工作-3"><a href="#准备工作-3" class="headerlink" title="准备工作"></a>准备工作</h3><h4 id="静态资源准备"><a href="#静态资源准备" class="headerlink" title="静态资源准备"></a>静态资源准备</h4><p>在linux系统中准备静态资源，用于进行访问</p>
+<p>cd &#x2F;</p>
+<p>mkdir data</p>
+<p>mkdir image</p>
+<p>mkdir www</p>
+<p>放入 www一个html文件，image一个图片</p>
+<h4 id="nginx配置"><a href="#nginx配置" class="headerlink" title="nginx配置"></a>nginx配置</h4><p><img src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB%E9%85%8D%E7%BD%AE.jpg" alt="配置"></p>
+<p>重启ng，访问 192.168.19.80&#x2F;www&#x2F;a.html 与192.168.19.80&#x2F;image&#x2F;01.jpg</p>
+<h2 id="Nginx高可用"><a href="#Nginx高可用" class="headerlink" title="Nginx高可用"></a>Nginx高可用</h2><p>在上面的实例中，如果tomcat宕机了还有一个可用，但是nginx宕机了呢？</p>
+<p><img src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/nginx%E9%AB%98%E5%8F%AF%E7%94%A8.png" alt="高可用"></p>
+<h3 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h3><ol>
+<li><p>两台nginx服务器 192.168.19.80、192.168.19.81</p>
+</li>
+<li><p>两台服务器安装keepalived （yum安装）</p>
+</li>
+</ol>
+<p>yum install keepalived -y</p>
+<p>根目录 cd &#x2F;etc&#x2F;keepalived</p>
+<p>操作配置文件keepalived.conf</p>
+<ol start="3">
+<li><p>需要虚拟ip</p>
+</li>
+<li><p>完成高可用配置（主从）</p>
+</li>
+</ol>
+<p>参考这篇文章吧，有些偏运维了，可以跳过，知道结合keepalived来实现nginx高可用即可</p>
+<p><a target="_blank" rel="noopener" href="https://blog.csdn.net/weixin_44790046/article/details/106857369">https://blog.csdn.net/weixin_44790046/article/details/106857369</a></p>
+<h2 id="nginx原理解析"><a href="#nginx原理解析" class="headerlink" title="nginx原理解析"></a>nginx原理解析</h2><h3 id="master-worker"><a href="#master-worker" class="headerlink" title="master&amp;worker"></a>master&amp;worker</h3><p>执行 ps- ef |grep nginx 命令， 我们发现有两个进程master和wroker</p>
+<h3 id="worker如何工作的"><a href="#worker如何工作的" class="headerlink" title="worker如何工作的"></a>worker如何工作的</h3><p>我们发送请求先到nginx的master，mater相当于得到一个任务之后，把任务给下面的worker，worker通过争抢机制得到任务，通过反向代理用tomcat完成具体操作，这是ng的最基本的流程，mater和worker的基本机制</p>
+<h3 id="一个master多个worker好处？"><a href="#一个master多个worker好处？" class="headerlink" title="一个master多个worker好处？"></a>一个master多个worker好处？</h3><ul>
+<li>可以使用.&#x2F;nginx -s reload热部署,利用nginx进行热部署操作</li>
+<li>每个worker是独立的进程，如果其中一个wroker出现问题，其他worker继续争抢，实现请求过程，不会造成服务中断。</li>
+</ul>
+<h3 id="设置多少worker合适呢？"><a href="#设置多少worker合适呢？" class="headerlink" title="设置多少worker合适呢？"></a>设置多少worker合适呢？</h3><p>Nginx同Redis类似都采用了io多路复用机制，每个worker都是一个独立的进程，但每个进程里只有一个主线程，通过异步非阻塞的方式来处理请求，即使是成千上万个请求也不在话下。每个worker的线程可以把一个cpu的性能发挥到极致。所以<strong>worker数和服务器的cpu数相等相等</strong>是最为适宜的。少了会浪费，多了会损耗。</p>
+<h3 id="连接数worker-connection"><a href="#连接数worker-connection" class="headerlink" title="连接数worker_connection"></a>连接数worker_connection</h3><ol>
+<li>发送请求，占用了worker几个连接数？</li>
+</ol>
+<p>答：2个或四个：访问静态资源2个，动态资源4个</p>
+<ol start="2">
+<li>nginx有1个master，4个worker，每个worker支持最大连接数1024，支持的最大并发数？</li>
+</ol>
+<ul>
+<li><p>若是静态资源：worker_connection（每个worker的最大连接数）*worker_processes（几个worker进程）&#x2F;2</p>
+</li>
+<li><p>如果是http作为反向代理：worker_connection（每个worker的最大连接数）*worker_processes（几个worker进程）&#x2F;4</p>
+</li>
+</ul>
+<h2 id="完结"><a href="#完结" class="headerlink" title="完结"></a>完结</h2><p>到这里基本就结束了，作为后端人员，不说精通，懂nginx原理 反向代理，负载均衡怎么做在日常工作中就没啥大问题了。</p>
+</article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta"><i class="fas fa-circle-user fa-fw"></i>文章作者: </span><span class="post-copyright-info"><a href="http://hangker.top">启航君</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta"><i class="fas fa-square-arrow-up-right fa-fw"></i>文章链接: </span><span class="post-copyright-info"><a href="http://hangker.top/2024/02/27/Nginx%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/">http://hangker.top/2024/02/27/Nginx使用详解/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta"><i class="fas fa-circle-exclamation fa-fw"></i>版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://hangker.top" target="_blank">启航苑&博客</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%AB%98%E5%8F%AF%E7%94%A8/">高可用</a><a class="post-meta__tags" href="/tags/Nginx/">Nginx</a><a class="post-meta__tags" href="/tags/%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1/">负载均衡</a><a class="post-meta__tags" href="/tags/%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86/">反向代理</a><a class="post-meta__tags" href="/tags/%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB/">动静分离</a></div><div class="post_share"><div class="social-share" data-image="/img/headImage.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer></script></div></div><div class="post-reward"><div class="reward-button"><i class="fas fa-qrcode"></i>赞助</div><div class="reward-main"><ul class="reward-all"><li class="reward-item"><a href="/img/wechatpay.png" target="_blank"><img class="post-qr-code-img" src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="/img/wechatpay.png" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/img/alipay.png" target="_blank"><img class="post-qr-code-img" src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="/img/alipay.png" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2024/03/01/hexo%E5%8D%9A%E5%AE%A2%E8%BF%81%E7%A7%BB%E6%96%B0%E7%94%B5%E8%84%91/" title="Hexo博客迁移到新电脑"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Hexo博客迁移到新电脑</div></div></a></div><div class="next-post pull-right"><a href="/2024/02/22/%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/" title="搭建一套企业级日志监控系统"><div class="cover" style="background: var(--default-bg-color)"></div><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">搭建一套企业级日志监控系统</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="fas fa-thumbs-up fa-fw"></i><span>相关推荐</span></div><div class="relatedPosts-list"><div><a href="/2024/03/25/Redis%E8%AF%A6%E8%A7%A3/" title="Redis详解【持久化及主从哨兵模式】"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-25</div><div class="title">Redis详解【持久化及主从哨兵模式】</div></div></a></div><div><a href="/2024/03/24/redis%E5%AE%89%E8%A3%85%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="Redis详解【安装及常用数据结构】"><div class="cover" style="background: var(--default-bg-color)"></div><div class="content is-center"><div class="date"><i class="far fa-calendar-alt fa-fw"></i> 2024-03-24</div><div class="title">Redis详解【安装及常用数据结构】</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="is-center"><div class="avatar-img"><img src="https://img.zcool.cn/community/0196fa582abab6a84a0d304f899eaf.gif" data-original="/img/headImage.png" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/></div><div class="author-info__name">启航君</div><div class="author-info__description">选择比努力重要</div></div><div class="card-info-data site-data is-center"><a href="/archives/"><div class="headline">文章</div><div class="length-num">9</div></a><a href="/tags/"><div class="headline">标签</div><div class="length-num">17</div></a><a href="/categories/"><div class="headline">分类</div><div class="length-num">7</div></a></div><a id="card-info-btn" target="_blank" rel="noopener" href="https://github.com/hangker1997"><i class="fab fa-github"></i><span>Follow Me</span></a><div class="card-info-social-icons is-center"><a class="social-icon" href="https://github.com/hangker1997" target="_blank" title="Github"><i class="fab fa-github" style="color: #24292e;"></i></a><a class="social-icon" href="https://blog.csdn.net/qq_48044202?type=blog" target="_blank" title="CSDN"><i class="fa fa-book-open"></i></a><a class="social-icon" href="tencent://AddContact/?fromId=45&amp;fromSubId=1&amp;subcmd=all&amp;uin=653284309&amp;website=www.oicqzone.com" target="_blank" title="QQ"><i class="fab fa-qq"></i></a><a class="social-icon" href="mailto:zhangqihang_O@163.com" target="_blank" title="Email"><i class="fas fa-envelope" style="color: #4a7dbe;"></i></a></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="fas fa-bullhorn fa-shake"></i><span>公告</span></div><div class="announcement_content">网络安全资料，java资料，社会劲爆热点事件分享...</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="fas fa-stream"></i><span>目录</span><span class="toc-percentage"></span></div><div class="toc-content is-expand"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#Nginx%E8%AF%A6%E8%A7%A3"><span class="toc-number">1.</span> <span class="toc-text">Nginx详解</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BD%9C%E7%94%A8"><span class="toc-number">1.1.</span> <span class="toc-text">作用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-number">1.1.1.</span> <span class="toc-text">反向代理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">1.1.2.</span> <span class="toc-text">负载均衡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB"><span class="toc-number">1.1.3.</span> <span class="toc-text">动静分离</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%89%E8%A3%85"><span class="toc-number">1.2.</span> <span class="toc-text">安装</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#docker-pull-nginx"><span class="toc-number">1.2.1.</span> <span class="toc-text">docker pull nginx</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BANginx%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.2.2.</span> <span class="toc-text">创建Nginx配置文件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%88%9B%E5%BB%BANginx%E5%AE%B9%E5%99%A8%E5%B9%B6%E8%BF%90%E8%A1%8C"><span class="toc-number">1.2.3.</span> <span class="toc-text">创建Nginx容器并运行</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BB%93%E6%9E%9C%E6%9F%A5%E7%9C%8B"><span class="toc-number">1.2.4.</span> <span class="toc-text">结果查看</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B5%8B%E8%AF%95"><span class="toc-number">1.2.5.</span> <span class="toc-text">测试</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-number">1.3.</span> <span class="toc-text">常用命令</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-number">1.4.</span> <span class="toc-text">配置文件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%A8%E5%B1%80%E5%9D%97"><span class="toc-number">1.4.1.</span> <span class="toc-text">全局块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#events%E5%9D%97"><span class="toc-number">1.4.2.</span> <span class="toc-text">events块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#http%E5%9D%97-%E9%87%8D%E8%A6%81"><span class="toc-number">1.4.3.</span> <span class="toc-text">http块[重要]</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#http%E5%85%A8%E5%B1%80%E5%9D%97"><span class="toc-number">1.4.3.1.</span> <span class="toc-text">http全局块</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#server%E5%9D%97"><span class="toc-number">1.4.3.2.</span> <span class="toc-text">server块</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86"><span class="toc-number">1.5.</span> <span class="toc-text">Nginx配置实例-反向代理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%95%88%E6%9E%9C"><span class="toc-number">1.5.1.</span> <span class="toc-text">实现效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C"><span class="toc-number">1.5.2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E9%85%8D%E7%BD%AE"><span class="toc-number">1.5.3.</span> <span class="toc-text">具体配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B-%E5%8F%8D%E5%90%91%E4%BB%A3%E7%90%86%E5%AE%9E%E4%BE%8B2"><span class="toc-number">1.6.</span> <span class="toc-text">Nginx配置实例-反向代理实例2</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%95%88%E6%9E%9C-1"><span class="toc-number">1.6.1.</span> <span class="toc-text">实现效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C-1"><span class="toc-number">1.6.2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%B7%E4%BD%93%E9%85%8D%E7%BD%AE-1"><span class="toc-number">1.6.3.</span> <span class="toc-text">具体配置</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B-%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1"><span class="toc-number">1.7.</span> <span class="toc-text">Nginx配置实例-负载均衡</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AE%9E%E7%8E%B0%E6%95%88%E6%9E%9C-2"><span class="toc-number">1.7.1.</span> <span class="toc-text">实现效果</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C-2"><span class="toc-number">1.7.2.</span> <span class="toc-text">准备工作</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E7%AD%96%E7%95%A5"><span class="toc-number">1.7.3.</span> <span class="toc-text">负载均衡策略</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%BD%AE%E8%AF%A2%EF%BC%88%E9%BB%98%E8%AE%A4%EF%BC%89"><span class="toc-number">1.7.3.1.</span> <span class="toc-text">轮询（默认）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#weight%EF%BC%88%E6%9D%83%E9%87%8D%EF%BC%89"><span class="toc-number">1.7.3.2.</span> <span class="toc-text">weight（权重）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#ip-hash"><span class="toc-number">1.7.3.3.</span> <span class="toc-text">ip_hash</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#fair"><span class="toc-number">1.7.3.4.</span> <span class="toc-text">fair</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx%E9%85%8D%E7%BD%AE%E5%AE%9E%E4%BE%8B-%E5%8A%A8%E9%9D%99%E5%88%86%E7%A6%BB"><span class="toc-number">1.8.</span> <span class="toc-text">Nginx配置实例-动静分离</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87%E5%B7%A5%E4%BD%9C-3"><span class="toc-number">1.8.1.</span> <span class="toc-text">准备工作</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%9D%99%E6%80%81%E8%B5%84%E6%BA%90%E5%87%86%E5%A4%87"><span class="toc-number">1.8.1.1.</span> <span class="toc-text">静态资源准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#nginx%E9%85%8D%E7%BD%AE"><span class="toc-number">1.8.1.2.</span> <span class="toc-text">nginx配置</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx%E9%AB%98%E5%8F%AF%E7%94%A8"><span class="toc-number">1.9.</span> <span class="toc-text">Nginx高可用</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%87%86%E5%A4%87"><span class="toc-number">1.9.1.</span> <span class="toc-text">准备</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#nginx%E5%8E%9F%E7%90%86%E8%A7%A3%E6%9E%90"><span class="toc-number">1.10.</span> <span class="toc-text">nginx原理解析</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#master-worker"><span class="toc-number">1.10.1.</span> <span class="toc-text">master&amp;worker</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#worker%E5%A6%82%E4%BD%95%E5%B7%A5%E4%BD%9C%E7%9A%84"><span class="toc-number">1.10.2.</span> <span class="toc-text">worker如何工作的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E4%B8%AAmaster%E5%A4%9A%E4%B8%AAworker%E5%A5%BD%E5%A4%84%EF%BC%9F"><span class="toc-number">1.10.3.</span> <span class="toc-text">一个master多个worker好处？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%BE%E7%BD%AE%E5%A4%9A%E5%B0%91worker%E5%90%88%E9%80%82%E5%91%A2%EF%BC%9F"><span class="toc-number">1.10.4.</span> <span class="toc-text">设置多少worker合适呢？</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%BF%9E%E6%8E%A5%E6%95%B0worker-connection"><span class="toc-number">1.10.5.</span> <span class="toc-text">连接数worker_connection</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%AE%8C%E7%BB%93"><span class="toc-number">1.11.</span> <span class="toc-text">完结</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="fas fa-history"></i><span>最新文章</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/06/18/hello-world/" title="你好 陌生人">你好 陌生人</a><time datetime="2024-06-18T13:27:23.756Z" title="发表于 2024-06-18 21:27:23">2024-06-18</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/25/Redis%E8%AF%A6%E8%A7%A3/" title="Redis详解【持久化及主从哨兵模式】">Redis详解【持久化及主从哨兵模式】</a><time datetime="2024-03-25T02:00:00.000Z" title="发表于 2024-03-25 10:00:00">2024-03-25</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/24/redis%E5%AE%89%E8%A3%85%E5%8F%8A%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/" title="Redis详解【安装及常用数据结构】">Redis详解【安装及常用数据结构】</a><time datetime="2024-03-24T01:00:00.000Z" title="发表于 2024-03-24 09:00:00">2024-03-24</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/22/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" title="Linux常用命令">Linux常用命令</a><time datetime="2024-03-22T07:15:00.000Z" title="发表于 2024-03-22 15:15:00">2024-03-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2024/03/12/%E7%AE%80%E5%8E%86%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9/" title="简历注意事项">简历注意事项</a><time datetime="2024-03-12T01:00:00.000Z" title="发表于 2024-03-12 09:00:00">2024-03-12</time></div></div></div></div></div></div></main><footer id="footer" style="background-image: url('/img/background.png')"><div id="footer-wrap"><div class="copyright">&copy;2020 - 2024 By 启航君</div><div class="framework-info"><span>框架 </span><a target="_blank" rel="noopener" href="https://hexo.io">Hexo</a><span class="footer-separator">|</span><span>主题 </span><a target="_blank" rel="noopener" href="https://github.com/jerryc127/hexo-theme-butterfly">Butterfly</a></div></div></footer></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="fas fa-book-open"></i></button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="fas fa-adjust"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="fas fa-arrows-alt-h"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="fas fa-cog fa-spin"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="fas fa-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><span class="scroll-percent"></span><i class="fas fa-arrow-up"></i></button></div></div><div><script src="/js/utils.js?v=4.13.0"></script><script src="/js/main.js?v=4.13.0"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/ui@5.0.33/dist/fancybox/fancybox.umd.min.js"></script><div class="js-pjax"></div><script id="canvas_nest" defer="defer" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/canvas-nest.min.js"></script><script src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true;
+POWERMODE.mobile = true;
+document.body.addEventListener('input', POWERMODE);
+</script><script id="click-show-text" src="https://cdn.jsdelivr.net/npm/butterfly-extsrc@1.1.3/dist/click-show-text.min.js" data-mobile="true" data-text="I,LOVE,YOU,富强,民主,文明,和谐,平等,公正,法治,爱国,敬业,诚信,友善" data-fontsize="15px" data-random="true" async="async"></script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><div id="local-search"><div class="search-dialog"><nav class="search-nav"><span class="search-dialog-title">搜索</span><span id="loading-status"></span><button class="search-close-button"><i class="fas fa-times"></i></button></nav><div class="is-center" id="loading-database"><i class="fas fa-spinner fa-pulse"></i><span>  数据库加载中</span></div><div class="search-wrap"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章" type="text"/></div></div><hr/><div id="local-search-results"></div><div id="local-search-stats-wrap"></div></div></div><div id="search-mask"></div><script src="/js/search/local-search.js?v=4.13.0"></script></div></div>
+        <style>
+            [bg-lazy] {
+                background-image: none !important;
+                background-color: #eee !important;
+            }
+        </style>
+        <script>
+            window.imageLazyLoadSetting = {
+                isSPA: false,
+                preloadRatio: 1,
+                processImages: null,
+            };
+        </script><script>window.addEventListener("load",function(){var t=/\.(gif|jpg|jpeg|tiff|png)$/i,r=/^data:image\/[a-z]+;base64,/;Array.prototype.slice.call(document.querySelectorAll("img[data-original]")).forEach(function(a){var e=a.parentNode;"A"===e.tagName&&(e.href.match(t)||e.href.match(r))&&(e.href=a.dataset.original)})});</script><script>!function(r){r.imageLazyLoadSetting.processImages=t;var e=r.imageLazyLoadSetting.isSPA,n=r.imageLazyLoadSetting.preloadRatio||1,c=a();function a(){var t=Array.prototype.slice.call(document.querySelectorAll("img[data-original]")),e=Array.prototype.slice.call(document.querySelectorAll("[bg-lazy]"));return t.concat(e)}function t(){e&&(c=a());for(var t,o=0;o<c.length;o++)0<=(t=(t=c[o]).getBoundingClientRect()).bottom&&0<=t.left&&t.top<=(r.innerHeight*n||document.documentElement.clientHeight*n)&&function(){var t,e,n,a,i=c[o];e=function(){c=c.filter(function(t){return i!==t}),r.imageLazyLoadSetting.onImageLoaded&&r.imageLazyLoadSetting.onImageLoaded(i)},(t=i).hasAttribute("bg-lazy")?(t.removeAttribute("bg-lazy"),e&&e()):(n=new Image,a=t.getAttribute("data-original"),n.onload=function(){t.src=a,t.removeAttribute("data-original"),e&&e()},t.src!==a&&(n.src=a))}()}function i(){clearTimeout(t.tId),t.tId=setTimeout(t,500)}t(),document.addEventListener("scroll",i),r.addEventListener("resize",i),r.addEventListener("orientationchange",i)}(this);</script></body></html>
