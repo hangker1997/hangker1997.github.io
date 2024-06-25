@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
+    <loc>http://hangker.top/2024/01/05/hello-world/</loc>
+    <lastmod>2024-06-25</lastmod>
+  </url>
+  <url>
     <loc>http://hangker.top/2024/06/24/%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A0%A1%E9%AA%8C%E5%B7%A5%E5%85%B7/</loc>
     <lastmod>2024-06-25</lastmod>
   </url>
@@ -38,10 +42,6 @@
   </url>
   <url>
     <loc>http://hangker.top/2024/03/22/linux%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</loc>
-    <lastmod>2024-06-18</lastmod>
-  </url>
-  <url>
-    <loc>http://hangker.top/2024/06/18/hello-world/</loc>
     <lastmod>2024-06-18</lastmod>
   </url>
 </urlset> 
