@@ -9,8 +9,37 @@
     <atom:link href="http://hangker.top/rss2.xml" rel="self" type="application/rss+xml"/>
     
     <description>选择比努力重要</description>
-    <pubDate>Sat, 22 Jun 2024 09:23:34 GMT</pubDate>
+    <pubDate>Tue, 25 Jun 2024 01:40:06 GMT</pubDate>
     <generator>http://hexo.io/</generator>
+    
+    <item>
+      <title>高性能敏感词工具</title>
+      <link>http://hangker.top/2024/06/24/%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A0%A1%E9%AA%8C%E5%B7%A5%E5%85%B7/</link>
+      <guid>http://hangker.top/2024/06/24/%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A0%A1%E9%AA%8C%E5%B7%A5%E5%85%B7/</guid>
+      <pubDate>Mon, 24 Jun 2024 04:00:00 GMT</pubDate>
+      
+      <description>敏感词过滤工具,简单好用</description>
+      
+      
+      
+      <content:encoded><![CDATA[<h1 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h1><p>项目接到个需求,对后端输入参数进行是否包含敏感词的一项校验,作为一名合格的java开发工程师(CRUD Boy),秉持着不重复造轮子的开发理念,遍历github找到了这款开源的敏感词检索神器-sensitive-word,看完本篇文章会教会你如何使用这款组件,以及本人在项目中所遇见的各种坑,帮助我们快速完成需求开发工作.</p><h1 id="基本使用"><a href="#基本使用" class="headerlink" title="基本使用"></a>基本使用</h1><h2 id="准备"><a href="#准备" class="headerlink" title="准备"></a>准备</h2><ul><li>JDK1.7+ (我的项目jdk21)</li><li>Maven 3.x+</li></ul><h2 id="Maven引入"><a href="#Maven引入" class="headerlink" title="Maven引入"></a>Maven引入</h2><pre><code class="xml">&lt;dependency&gt;    &lt;groupId&gt;com.github.houbb&lt;/groupId&gt;    &lt;artifactId&gt;sensitive-word&lt;/artifactId&gt;    &lt;version&gt;0.14.0&lt;/version&gt;&lt;/dependency&gt;</code></pre><p>注意,请关注github上版本变化,我目前使用的还是最新的</p><h2 id="自定义配置"><a href="#自定义配置" class="headerlink" title="自定义配置"></a>自定义配置</h2><p>  这个配置主要是配置黑白名单</p><h3 id="自定义黑名单"><a href="#自定义黑名单" class="headerlink" title="自定义黑名单"></a>自定义黑名单</h3><p><img src="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%95%8F%E6%84%9F%E8%AF%8D%E5%B7%A5%E5%85%B7/%E8%87%AA%E5%AE%9A%E4%B9%89%E9%BB%91%E5%90%8D%E5%8D%95.png" alt="自定义黑名单"></p><h3 id="自定义白名单"><a href="#自定义白名单" class="headerlink" title="自定义白名单"></a>自定义白名单</h3><p>需求没有白名单的,就没写,跟黑名单一样配置</p><h3 id="初始化引导类"><a href="#初始化引导类" class="headerlink" title="初始化引导类"></a>初始化引导类</h3><p>红框里的就是我们定义的黑白名单了</p><p><img src="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%95%8F%E6%84%9F%E8%AF%8D%E5%B7%A5%E5%85%B7/%E5%88%9D%E5%A7%8B%E5%8C%96%E5%BC%95%E5%AF%BC%E7%B1%BB.png" alt="初始化引导类"></p><h2 id="使用"><a href="#使用" class="headerlink" title="使用"></a>使用</h2><p>  上述做完,我们就可以使用了,下图是次工具的核心类</p><p><img src="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%95%8F%E6%84%9F%E8%AF%8D%E5%B7%A5%E5%85%B7/%E4%BD%BF%E7%94%A8.png" alt="引入"></p><h2 id="核心方法"><a href="#核心方法" class="headerlink" title="核心方法"></a>核心方法</h2><p><img src="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%95%8F%E6%84%9F%E8%AF%8D%E5%B7%A5%E5%85%B7/%E6%A0%B8%E5%BF%83%E6%96%B9%E6%B3%95.png" alt="核心方法"></p><p>我使用的是其中的contains(String)方法,你可以选用适合你需求的方法进行敏感词校验</p><h1 id="测试过程中踩过的坑"><a href="#测试过程中踩过的坑" class="headerlink" title="测试过程中踩过的坑"></a>测试过程中踩过的坑</h1><ul><li>输入了个手机号,显示包含敏感词,可是我这一个文本明明没有名词啊contains(String)方法还是返回了true,包含敏感词,赶紧查看文档,原来配置中开启了 数字检测,数字超过8位就判断包含敏感词了,赶紧关了,哎,好了…………..</li><li>输入了一个中文的()发现也包含敏感词,我黑名单里面明明是英文的,有些奇怪,还是参考文档吧,发现里面忽略全角半角开启了,赶紧关掉,发现也好了…………….</li><li>自定义配置中最好给这些配置说明里参考一下,不需要的情况请选择false,否则会有各种意想不到的问题,有需要了再开,注意参考我下面的配置方法与配置说明</li></ul><h2 id="配置方法"><a href="#配置方法" class="headerlink" title="配置方法"></a>配置方法</h2><p><img src="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%95%8F%E6%84%9F%E8%AF%8D%E5%B7%A5%E5%85%B7/%E9%85%8D%E7%BD%AE%E6%96%B9%E6%B3%95.png" alt="配置方法"></p><h2 id="配置说明"><a href="#配置说明" class="headerlink" title="配置说明"></a>配置说明</h2><p><img src="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%95%8F%E6%84%9F%E8%AF%8D%E5%B7%A5%E5%85%B7/%E9%85%8D%E7%BD%AE%E8%AF%B4%E6%98%8E.png" alt="配置说明"></p>]]></content:encoded>
+      
+      
+      <category domain="http://hangker.top/categories/%E5%B7%A5%E5%85%B7%E7%B1%BB/">工具类</category>
+      
+      
+      <category domain="http://hangker.top/tags/sensitive-word/">sensitive-word</category>
+      
+      <category domain="http://hangker.top/tags/%E6%95%8F%E6%84%9F%E8%AF%8D/">敏感词</category>
+      
+      <category domain="http://hangker.top/tags/%E5%B7%A5%E5%85%B7/">工具</category>
+      
+      <category domain="http://hangker.top/tags/%E9%AB%98%E6%80%A7%E8%83%BD/">高性能</category>
+      
+      
+      <comments>http://hangker.top/2024/06/24/%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A0%A1%E9%AA%8C%E5%B7%A5%E5%85%B7/#disqus_thread</comments>
+      
+    </item>
     
     <item>
       <title>我的简历</title>
@@ -245,33 +274,6 @@
       
       
       <comments>http://hangker.top/2024/02/27/Nginx%E4%BD%BF%E7%94%A8%E8%AF%A6%E8%A7%A3/#disqus_thread</comments>
-      
-    </item>
-    
-    <item>
-      <title>搭建一套企业级日志监控系统</title>
-      <link>http://hangker.top/2024/02/22/%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/</link>
-      <guid>http://hangker.top/2024/02/22/%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/</guid>
-      <pubDate>Thu, 22 Feb 2024 02:00:00 GMT</pubDate>
-      
-      <description>搭建一套企业级日志监控系统</description>
-      
-      
-      
-      <content:encoded><![CDATA[<h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><h3 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h3><p>公司原先基于MySQL的MSP监控项目已经无法满足集团对系统关键页面、关键业务和接口实现有效监控的要求，故更换新架构MSP-2:Kafka数据采集+ClickHouse数据库+Flink数据计算+Grafana看板</p><h3 id="术语"><a href="#术语" class="headerlink" title="术语"></a>术语</h3><ul><li>MSP-2：监控分析平台的简称</li><li>Kafka：是由Apache软件基金会开发的一个开源流处理平台</li><li>ClickHouse：是一个用于联机分析处理（OLAP）的开源列式数据库</li><li>Zookeeper：是一个分布式的。开源的分布式应用程序协调服务</li></ul><h3 id="目标"><a href="#目标" class="headerlink" title="目标"></a>目标</h3><p>MSP-2主要实现如下功能：</p><ul><li>数据的采集</li><li>数据的分析计算</li></ul><h2 id="部署"><a href="#部署" class="headerlink" title="部署"></a>部署</h2><p>话不多说，清楚了MSP-2系统是干什么的之后就开始干活吧。</p><h3 id="部署架构图"><a href="#部署架构图" class="headerlink" title="部署架构图"></a>部署架构图</h3><p><img src="https://ssyx-hanker.oss-cn-shanghai.aliyuncs.com/2023/08/02/MSP-2%E9%83%A8%E7%BD%B2%E6%9E%B6%E6%9E%84%E5%9B%BE-%E5%AF%BC%E5%87%BA.png" alt="MSP-2架构"></p><h4 id="注"><a href="#注" class="headerlink" title="注"></a>注</h4><ul><li>新部署集群：ZK、Kafka、ClickHouse</li><li>现有服务改造：Flume，Grafana</li><li>现有功能无需改造：xxx系统、业务日志文件</li></ul><h3 id="部署实施方案"><a href="#部署实施方案" class="headerlink" title="部署实施方案"></a>部署实施方案</h3><h4 id="资源分配"><a href="#资源分配" class="headerlink" title="资源分配"></a>资源分配</h4><p>仅供参考，每个公司可分配的资源不一样</p><p><img src="https://ssyx-hanker.oss-cn-shanghai.aliyuncs.com/2023/08/02/%E8%B5%84%E6%BA%90%E5%88%86%E9%85%8D.jpg" alt="资源分配"></p><h4 id="集群高可用"><a href="#集群高可用" class="headerlink" title="集群高可用"></a>集群高可用</h4><p><img src="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/%E9%9B%86%E7%BE%A4%E9%AB%98%E5%8F%AF%E7%94%A8.jpg" alt="集群高可用"></p><h4 id="数据存储方案"><a href="#数据存储方案" class="headerlink" title="数据存储方案"></a>数据存储方案</h4><ol><li>Zookeeper数据存储</li></ol><p><img src="https://hangker-top.oss-cn-beijing.aliyuncs.com/%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/Zookeeper%E6%95%B0%E6%8D%AE%E5%AD%98%E5%82%A8.jpg" alt="Zookeeper数据存储"></p><ol start="2"><li>Kafka数据存储</li></ol><p>略</p><ol start="3"><li>ClickHouse数据存储</li></ol><p>数据存储层次划分：</p><ul><li>ods：原始数据层</li><li>dim：公共维度汇总层</li><li>dwd：明细数据层</li><li>dwm：数据中间层</li><li>dws：数据服务层</li><li>dwt：主题数据层</li><li>ads：数据应用层</li></ul><p>各层存放的数据维度不一样</p><h4 id="权限分配方案"><a href="#权限分配方案" class="headerlink" title="权限分配方案"></a>权限分配方案</h4><p>略</p><h2 id="系统安装及配置"><a href="#系统安装及配置" class="headerlink" title="系统安装及配置"></a>系统安装及配置</h2><h3 id="安装包准备"><a href="#安装包准备" class="headerlink" title="安装包准备"></a>安装包准备</h3><h4 id="Zookeeper安装包准备"><a href="#Zookeeper安装包准备" class="headerlink" title="Zookeeper安装包准备"></a>Zookeeper安装包准备</h4><ol><li>cd &#x2F;home&#x2F;dev </li><li>安装包下载：wget <a href="http://archive.apache.org/dist/zookeeper/zookeeper-3.6.4/apache-zookeeper-3.6.4-bin.tar.gz">http://archive.apache.org/dist/zookeeper/zookeeper-3.6.4/apache-zookeeper-3.6.4-bin.tar.gz</a></li><li>解压：tar -zxf apache-zookeeper-3.6.4-bin.tar.gz</li><li>重新打包Zookeeper安装包：</li></ol><ul><li>mv .&#x2F;apache-zookeeper-3.6.4-bin .&#x2F;zookeeper</li><li>zip -ry zookeeper.zip zookeeper</li></ul><h4 id="Kafka安装包准备"><a href="#Kafka安装包准备" class="headerlink" title="Kafka安装包准备"></a>Kafka安装包准备</h4><ol><li>安装包下载：wget <a href="https://archive.apache.org/dist/kafka/3.5.0/kafka_2.12-3.5.0.tgz">https://archive.apache.org/dist/kafka/3.5.0/kafka_2.12-3.5.0.tgz</a></li><li>下载的安装包解压缩：tar -zxf kafka_2.12-3.5.0.tgz</li><li>重新打包Kafka安装包：</li></ol><ul><li>mv .&#x2F;kafka_2.12-3.5.0 .&#x2F;kafka</li><li>zip -ry kafka.zip kafka</li></ul><h4 id="ClickHouse安装包准备"><a href="#ClickHouse安装包准备" class="headerlink" title="ClickHouse安装包准备"></a>ClickHouse安装包准备</h4><ol><li>cd &#x2F;home&#x2F;dev</li><li>安装包下载：</li></ol><ul><li>wget <a href="https://packages.clickhouse.com/tgz/lts/clickhouse-client-22.3.10.22-amd64.tgz">https://packages.clickhouse.com/tgz/lts/clickhouse-client-22.3.10.22-amd64.tgz</a></li><li>wget <a href="https://packages.clickhouse.com/tgz/lts/clickhouse-common-static-22.3.10.22-amd64.tgz">https://packages.clickhouse.com/tgz/lts/clickhouse-common-static-22.3.10.22-amd64.tgz</a></li><li>wget <a href="https://packages.clickhouse.com/tgz/lts/clickhouse-server-22.3.10.22-amd64.tgz">https://packages.clickhouse.com/tgz/lts/clickhouse-server-22.3.10.22-amd64.tgz</a></li></ul><ol start="3"><li>解压缩：</li></ol><ul><li>tar -xzvf clickhouse-common-static-22.3.10.22-amd64.tgz</li><li>tar -xzvf clickhouse-client-22.3.10.22-amd64.tgz</li><li>tar -xzvf clickhouse-server-22.3.10.22-amd64.tgz</li></ul><ol start="4"><li>ClickHouse-Server安装包分发：</li></ol><ul><li>mkdir .&#x2F;clickhouse-server</li><li>mkdir .&#x2F;clickhouse-server&#x2F;bin</li><li>mkdir .&#x2F;clickhouse-server&#x2F;etc</li><li>mkdir .&#x2F;clickhouse-server&#x2F;run</li><li>cp -rf .&#x2F;clickhouse-common-static-22.3.10.22&#x2F;usr&#x2F;bin&#x2F;* .&#x2F;clickhouse-server&#x2F;bin</li><li>cp -rf .&#x2F;clickhouse-server-22.3.10.22&#x2F;usr&#x2F;bin&#x2F;* .&#x2F;-clickhouse-server&#x2F;bin</li><li>cp -rf .&#x2F;clickhouse-server-22.3.10.22&#x2F;etc&#x2F;clickhouse-server&#x2F;* .&#x2F;clickhouse-server&#x2F;etc</li><li>sed -i “s#&#x2F;var&#x2F;log&#x2F;#&#x2F;data&#x2F;log&#x2F;#g” .&#x2F;clickhouse-server&#x2F;etc&#x2F;config.xml</li><li>sed -i “s#&#x2F;var&#x2F;lib&#x2F;#&#x2F;data&#x2F;data&#x2F;#g” .&#x2F;clickhouse-server&#x2F;etc&#x2F;config.xml</li></ul><ol start="5"><li>ClickHouse-Client安装包分发：</li></ol><ul><li>mkdir .&#x2F;clickhouse-client</li><li>mkdir .&#x2F;clickhouse-client&#x2F;bin</li><li>mkdir .&#x2F;clickhouse-client&#x2F;etc</li><li>cp -rf .&#x2F;clickhouse-common-static-22.3.10.22&#x2F;usr&#x2F;bin&#x2F;* .&#x2F;clickhouse-client&#x2F;bin</li><li>cp -rf .&#x2F;clickhouse-client-22.3.10.22&#x2F;usr&#x2F;bin&#x2F;* .&#x2F;clickhouse-client&#x2F;bin</li><li>cp -rf .&#x2F;clickhouse-client-22.3.10.22&#x2F;etc&#x2F;clickhouse-client&#x2F;* .&#x2F;clickhouse-client&#x2F;etc</li><li>zip -ry clickhouse-server.zip clickhouse-server</li><li>zip -ry clickhouse-client.zip clickhouse-client</li></ul><h4 id="Flume安装包准备"><a href="#Flume安装包准备" class="headerlink" title="Flume安装包准备"></a>Flume安装包准备</h4><ol><li>cd &#x2F;home&#x2F;dev</li><li>安装包下载：wget <a href="https://dlcdn.apache.org/flume/1.11.0/apache-flume-1.11.0-bin.tar.gz">https://dlcdn.apache.org/flume/1.11.0/apache-flume-1.11.0-bin.tar.gz</a></li><li>解压缩：tar -zxf apache-flume-1.11.0-bin.tar.gz</li><li>重新打包：</li></ol><ul><li>mv .&#x2F;apache-flume-1.11.0-bin .&#x2F;flume</li><li>zip -ry flume.zip flume</li></ul><h3 id="操作系统配置"><a href="#操作系统配置" class="headerlink" title="操作系统配置"></a>操作系统配置</h3><ul><li>创建存储目录:</li><li>su dev</li><li>mkdir &#x2F;work&#x2F;app</li><li>mkdir &#x2F;data&#x2F;data</li><li>mkdir &#x2F;data&#x2F;log</li></ul><h3 id="Java安装"><a href="#Java安装" class="headerlink" title="Java安装"></a>Java安装</h3><ul><li>sudo yum -y install java-1.8.0-openjdk-devel</li><li>java -version</li></ul><h3 id="Zookeeper集群"><a href="#Zookeeper集群" class="headerlink" title="Zookeeper集群"></a>Zookeeper集群</h3>]]></content:encoded>
-      
-      
-      <category domain="http://hangker.top/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/">系统架构</category>
-      
-      
-      <category domain="http://hangker.top/tags/ClickHouse/">ClickHouse</category>
-      
-      <category domain="http://hangker.top/tags/Kafka/">Kafka</category>
-      
-      <category domain="http://hangker.top/tags/Flume/">Flume</category>
-      
-      
-      <comments>http://hangker.top/2024/02/22/%E4%BC%81%E4%B8%9A%E7%BA%A7%E6%97%A5%E5%BF%97%E7%9B%91%E6%8E%A7%E7%B3%BB%E7%BB%9F/#disqus_thread</comments>
       
     </item>
     
