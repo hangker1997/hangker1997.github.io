@@ -234,13 +234,6 @@
   </url>
   
   <url>
-    <loc>http://hangker.top/tags/Linux/</loc>
-    <lastmod>2024-06-25</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.2</priority>
-  </url>
-  
-  <url>
     <loc>http://hangker.top/tags/%E8%87%AA%E6%88%91%E4%BB%8B%E7%BB%8D/</loc>
     <lastmod>2024-06-25</lastmod>
     <changefreq>weekly</changefreq>
@@ -249,6 +242,13 @@
   
   <url>
     <loc>http://hangker.top/tags/java/</loc>
+    <lastmod>2024-06-25</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.2</priority>
+  </url>
+  
+  <url>
+    <loc>http://hangker.top/tags/Linux/</loc>
     <lastmod>2024-06-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
@@ -348,14 +348,14 @@
   </url>
   
   <url>
-    <loc>http://hangker.top/categories/Linux/</loc>
+    <loc>http://hangker.top/categories/%E7%AE%80%E5%8E%86/</loc>
     <lastmod>2024-06-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
   </url>
   
   <url>
-    <loc>http://hangker.top/categories/%E7%AE%80%E5%8E%86/</loc>
+    <loc>http://hangker.top/categories/Linux/</loc>
     <lastmod>2024-06-25</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.2</priority>
