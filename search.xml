@@ -4,6 +4,35 @@
   
     
     <entry>
+      <title>每周AI技术新进展（2024 7.1-7.5）</title>
+      <link href="/2024/07/09/%E6%AF%8F%E5%91%A8AI%E6%8A%80%E6%9C%AF%E6%96%B0%E8%BF%9B%E5%B1%95%EF%BC%882024%207.1-7.5)/"/>
+      <url>/2024/07/09/%E6%AF%8F%E5%91%A8AI%E6%8A%80%E6%9C%AF%E6%96%B0%E8%BF%9B%E5%B1%95%EF%BC%882024%207.1-7.5)/</url>
+      
+        <content type="html"><![CDATA[<h1 id="每周AI技术新进展（2024-7-1-7-5）"><a href="#每周AI技术新进展（2024-7-1-7-5）" class="headerlink" title="每周AI技术新进展（2024 7.1-7.5）"></a>每周AI技术新进展（2024 7.1-7.5）</h1><h2 id="世界人工智能大会"><a href="#世界人工智能大会" class="headerlink" title="世界人工智能大会"></a>世界人工智能大会</h2><p>  7月4日，2024世界人工智能大会暨人工智能全球治理高级别会议（简称“WAIC 2024”）在上海世博中心、世博展览馆拉开序幕。来自55个国家的180多位海外嘉宾参会，围绕全球治理、产业发展、科学前沿三大重点，展开深入交流研讨。</p><h2 id="大会主要看点"><a href="#大会主要看点" class="headerlink" title="大会主要看点"></a>大会主要看点</h2><h3 id="WAIC-特别专访"><a href="#WAIC-特别专访" class="headerlink" title="WAIC 特别专访"></a>WAIC 特别专访</h3><p>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;清华大学人工智能国际治理研究院副院长梁正指出，自从ChatGPT等生成式人工智能爆发以来，AI大模型正在成为产业基础设施，通过“基础大模型+行业数据微调”实现规模化生产；人机关系变革加速“AI平民化”，多模态AI降低人机交互门槛；AI大模型分解重复性智力劳动，推动人机分工协作，助推智力密集型服务产业化。爆款应用有望在AI4S、智能驾驶等领域出现，短期在B端市场变现，长期在C端市场潜力更大。边缘小众市场可能是技术颠覆性创新的主要来源。</p><p>  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;百度创始人李彦宏强调了AI技术的迅猛发展。他指出，尽管AI跑分刷榜现象带来了负面影响，但更应关注AI的实际应用价值，避免陷入单纯追求超级应用的误区。李彦宏强调，基础模型的强大推动了各行各业的普及应用，例如在快递、小说创作和代码生成等领域。百度文心大模型的日调用量显著增长，展示了其在提高行业效率方面的显著作用。他还提到AI在教育、医疗等领域的巨大潜力，并讨论了智能体作为未来重要应用方向，特别是高考智能体能够解决高考生的个性化问题。李彦宏认为，随着AI的发展，数据标注师和提示词工程师等新职业将兴起。AI将作为人类的助手（copilot），辅助工作而非取代。</p><h3 id="WAIC-展览新技术产品"><a href="#WAIC-展览新技术产品" class="headerlink" title="WAIC 展览新技术产品"></a>WAIC 展览新技术产品</h3><h4 id="合合信息公司利用AI技术修复古籍"><a href="#合合信息公司利用AI技术修复古籍" class="headerlink" title="合合信息公司利用AI技术修复古籍"></a>合合信息公司利用AI技术修复古籍</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;合合信息公司利用AI技术修复古籍，成功解决了中文古籍文档中文字残缺、字迹污损等问题，不仅使受损的古文献重见天日，还提高了文档和照片的清晰度，并将纸质文件转化为可编辑格式，大幅提升工作效率。同时，扫描全能王应用也增强了照片和文档的清晰度，支持文字编辑。大模型技术的发展和对高质量语料的需求日益增加，特别是在国内。此外，AI在数据处理和知识推理方面也表现出色，如将雷达图等图表转化为Markdown格式，提高了效率和准确性。</p><h4 id="十八金刚-众创未来-人形机器人先锋阵列"><a href="#十八金刚-众创未来-人形机器人先锋阵列" class="headerlink" title="十八金刚 众创未来-人形机器人先锋阵列"></a>十八金刚 众创未来-人形机器人先锋阵列</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;在WAIC 2024大会上，18台不同技术架构的人形机器人实现了协同控制。由国家地方共建人形机器人创新中心研发的全尺寸开源机器人“青龙”作为领队首次亮相。其他机器人分别来自多个单位，具有不同的运动能力，包括复杂地形行走、强大负载能力和人机交互体验。通过软硬件解耦，这些机器人可以完成统一动作，展示了中国在异构群智与具身智能领域的突破。</p><h4 id="通义灵码"><a href="#通义灵码" class="headerlink" title="通义灵码"></a>通义灵码</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;阿里云推出的智能编码辅助工具，基于通义大模型，提供实时代码续写、生成单元测试、代码优化等功能。它以毫秒级速度生成代码建议，提升开发者效率。通义灵码在中国信通院的评估中获最高级，目前插件下载量达350万，每天推荐代码超过3000万次，被采纳代码行数超亿行。</p><h4 id="YOGA-Book-9i-AI元启"><a href="#YOGA-Book-9i-AI元启" class="headerlink" title="YOGA Book 9i AI元启"></a>YOGA Book 9i AI元启</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;联想推出的全尺寸双屏笔记本电脑，搭载英特尔Ultra处理器和32GB大内存，支持瀑布屏和横屏模式，提供跨屏体验。设备配有联想天禧智能体系统，支持跨设备文件传输等AI功能，旨在成为用户的“工作伙伴”。</p><h4 id="基于蚂蚁百灵大模型的“支付宝智能助理”"><a href="#基于蚂蚁百灵大模型的“支付宝智能助理”" class="headerlink" title="基于蚂蚁百灵大模型的“支付宝智能助理”"></a>基于蚂蚁百灵大模型的“支付宝智能助理”</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;蚂蚁集团在本届展会推出的“支付宝智能助理”，基于百灵大模型开发，提供超过8000项数字生活服务。用户通过支付宝App可以轻松访问这些服务。智能助理还能连接金融、医疗等垂直行业的AI智能体，提供专业服务。</p><h4 id="Vimi可控人物视频生成大模型"><a href="#Vimi可控人物视频生成大模型" class="headerlink" title="Vimi可控人物视频生成大模型"></a>Vimi可控人物视频生成大模型</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;商汤科技推出的Vimi产品，仅需一张照片即可生成人物视频，通过动作视频或动画参数驱动，生成和目标动作一致的视频。Vimi可生成长达一分钟的单镜头人物视频，控制人物表情和肢体动作，生成合理的头发、服饰和背景变化。</p><h4 id="特斯拉赛博越野旅行车"><a href="#特斯拉赛博越野旅行车" class="headerlink" title="特斯拉赛博越野旅行车"></a>特斯拉赛博越野旅行车</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;特斯拉推出的赛博越野旅行车，具有未来感的外观和防弹车身，采用48V低压架构和线控转向技术，提升能效和转向操控。赛博越野旅行车代表了电动车行业的前沿创新和特斯拉的家族基因。</p><h4 id="谷歌最新开源的Gemma2大模型"><a href="#谷歌最新开源的Gemma2大模型" class="headerlink" title="谷歌最新开源的Gemma2大模型"></a>谷歌最新开源的Gemma2大模型</h4><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;谷歌最新开源的Gemma2大模型，包括9B和27B两种参数规模，其中27B版本性能接近70B的Llama3，对中文处理能力显著提升。用户可在谷歌AI Studio平台免费体验或通过ollama部署到本地。</p><h5 id="亮点"><a href="#亮点" class="headerlink" title="亮点"></a>亮点</h5><h6 id="离线部署优势"><a href="#离线部署优势" class="headerlink" title="离线部署优势"></a>离线部署优势</h6><ul><li>对显卡要求降低</li><li>支持16G内存电脑进行推理</li></ul><h6 id="部署方式"><a href="#部署方式" class="headerlink" title="部署方式"></a>部署方式</h6><ul><li>可在谷歌AI Studio平台免费使用<a href="https://aistudio.google.com/app/prompts/new_chat?model=gemma-2-27b-it&pli=1">https://aistudio.google.com/app/prompts/new_chat?model=gemma-2-27b-it&amp;pli=1</a></li><li>通过ollama一键部署到本机电脑</li></ul><h3 id="周鸿伟谈AI竞争新思路"><a href="#周鸿伟谈AI竞争新思路" class="headerlink" title="周鸿伟谈AI竞争新思路"></a>周鸿伟谈AI竞争新思路</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;周鸿伟谈论了在GPU领域，特别是针对英伟达的竞争策略。周鸿伟认为，中国GPU厂商应该走一条与众不同的道路，而不是盲目追随英伟达。他提到了哈佛大学辍学生研发的一种新型的专用于Transformer算法的推理芯片，这种芯片在性能上可能超过了英伟达的部分产品。周鸿伟还提到了中国在矿机芯片上的成功经验，并建议将这种专用的ASC芯片应用于人工智能推理领域。</p><h4 id="亮点-1"><a href="#亮点-1" class="headerlink" title="亮点"></a>亮点</h4><ul><li>提出“think different”策略，建议GPU厂商不要盲目模仿英伟达，寻找独特的竞争方式。</li><li>中国厂商在矿机芯片上的成功经验，这种专用ASC芯片模式可以应用人工智能推理领域。</li><li>强调训练芯片的重要性，指出训练可能仍需英伟达的芯片，但推理操作是持续进行的。</li><li>这种专用的推理芯片可能对人工智能生成式大模型的发展产生革命性的影响。</li></ul><h3 id="GPT大模型学习资源"><a href="#GPT大模型学习资源" class="headerlink" title="GPT大模型学习资源"></a>GPT大模型学习资源</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;两个关于GPT大模型的学习资源，包括斯坦福大学数学系的学习频道和一本图解书籍，涵盖了GPT原理、梯度下降、反向传播等深度学习基础知识。</p><h4 id="学习资源介绍"><a href="#学习资源介绍" class="headerlink" title="学习资源介绍"></a>学习资源介绍</h4><ul><li>斯坦福大学数学系的学习频道：<a href="https://www.3blue1brown.com/">https://www.3blue1brown.com/</a></li><li>以动画形式讲解GPT原理、梯度下降、反向传播等</li><li>GPT大模型可生化工具：<a href="https://bbycroft.net/">https://bbycroft.net/</a></li><li>透视GPT内部网络结构，展示每一层的处理逻辑</li><li>图解书籍推荐：《GPT图解：大模型是怎么构建的》</li><li>通过彩绘图画讲解Multi-Vector RNN、Transformer和GPT等技术</li></ul><h3 id="钉钉平台多种国内大模型综合利用"><a href="#钉钉平台多种国内大模型综合利用" class="headerlink" title="钉钉平台多种国内大模型综合利用"></a>钉钉平台多种国内大模型综合利用</h3><p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;钉钉平台上如何利用多种国内大模型提升工作效率，包括文本理解、图表生成、AI绘画和合同草拟等功能。</p><h4 id="亮点-2"><a href="#亮点-2" class="headerlink" title="亮点"></a>亮点</h4><ul><li>多模型调用<ul><li>钉钉平台支持调用多家国内大模型，如minimax、月之暗面、智谱AI等</li><li>用户可以根据需求选择不同模型，如月之暗面擅长文本理解与总结</li></ul></li><li>多模态能力<ul><li>GLM-4模型具备多模态能力，可用于聊天、图表生成和AI绘画</li></ul></li><li>行业模型应用<ul><li>通义法睿等行业模型可用于草拟合同，如租房合同，符合法律规范</li></ul></li><li>效率提升<ul><li>通过钉钉平台，用户可以整合多源数据，进行分析和决策，大幅提升学习与工作效率</li></ul></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> 人工智能 </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 人工智能 </tag>
+            
+            <tag> GPT </tag>
+            
+            <tag> 大模型 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
       <title>高性能敏感词工具</title>
       <link href="/2024/06/24/%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A0%A1%E9%AA%8C%E5%B7%A5%E5%85%B7/"/>
       <url>/2024/06/24/%E6%95%8F%E6%84%9F%E8%AF%8D%E6%A0%A1%E9%AA%8C%E5%B7%A5%E5%85%B7/</url>
